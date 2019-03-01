@@ -27,10 +27,8 @@ var Decode = /* module */[
   /* decodeData */decodeData
 ];
 
-var url = "http://api.lumpen.agency/data.json";
-
 function fetchData(param) {
-  return fetch(url).then((function (prim) {
+  return fetch("http://api.lumpen.agency/data.json").then((function (prim) {
                     return prim.json();
                   })).then((function (json) {
                   var data = decodeData(json);
@@ -103,7 +101,6 @@ function make(_children) {
 }
 
 exports.Decode = Decode;
-exports.url = url;
 exports.fetchData = fetchData;
 exports.component = component;
 exports.make = make;

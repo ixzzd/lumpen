@@ -12,36 +12,35 @@ type state =
   | Failure
   | Success(data);
 
-module Decode = {
-  let decodeModel = json =>{
-    Json.Decode.{
-      id: field("id", int, json),
-      name: field("name", string, json),
-    };
-  }
-  let decodeData = json =>{
-    Json.Decode.{
-      models: field("models", list(decodeModel), json),
-    };
-  }
-};
-
-let url = "http://api.lumpen.agency/data.json";
-
-let fetchData = () => {
-  Js.Promise.(
-    Fetch.fetch(url)
-    |> then_(Fetch.Response.json)
-    |> then_(json => json |> Decode.decodeData |> (data => Some(data) |> resolve))
-    |> catch(_err => resolve(None)
-  )
-  );
-}
-
 type action =
   | LoadData
   | DataLoaded(data)
   | LoadDataFailed;
+
+module Decode = {
+  let decodeModel = json =>{
+    Json.Decode.{
+      id: json |> field("id", int),
+      name: json |> field("name", string),
+    };
+  }
+  let decodeData = json =>{
+    Json.Decode.{
+      models: json |> field("models", list(decodeModel)),
+    };
+  }
+};
+
+
+let fetchData = () => {
+  let url = "http://api.lumpen.agency/data.json";
+  Js.Promise.(
+      Fetch.fetch(url)
+      |> then_(Fetch.Response.json)
+      |> then_(json => json |> Decode.decodeData |> (data => Some(data) |> resolve))
+      |> catch(_err => resolve(None))
+  );
+}
 
 let component = ReasonReact.reducerComponent("FetchComponent");
 
@@ -50,27 +49,25 @@ let make = _children => {
   initialState: () => Loading,
   reducer: (action, _state) =>
     switch (action) {
-      | LoadData =>
+    | LoadData =>
       ReasonReact.UpdateWithSideEffects(
         Loading,
         (
-          self =>
-          Js.Promise.(
+          self => Js.Promise.(
             fetchData()
             |> then_(result =>
-            switch (result) {
-              | Some(data) =>
-              resolve(self.send(DataLoaded(data)))
-              | None => resolve(self.send(LoadDataFailed))
+              switch (result) {
+                | Some(data) => resolve(self.send(DataLoaded(data)))
+                | None => resolve(self.send(LoadDataFailed))
               }
             )
             |> ignore
-            )
+          )
         ),
       )
-      | DataLoaded(data) => ReasonReact.Update(Success(data))
-      | LoadDataFailed => ReasonReact.Update(Failure)
-      },
+    | DataLoaded(data) => ReasonReact.Update(Success(data))
+    | LoadDataFailed => ReasonReact.Update(Failure)
+  },
   didMount: (self) => {
     self.send(LoadData)
   },
