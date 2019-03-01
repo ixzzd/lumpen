@@ -3,9 +3,15 @@ let app = Express.App.make();
 
 /* Our initial rendering function, we will soon make this way better */
 let renderHTML = (_next, _req, res) => {
-  let content = ReactDOMServerRe.renderToString(<App />);
+  let content = ReactDOMServerRe.renderToString(<FetchData />);
   Express.Response.sendString(Layout.make(~content, ~title="Server Rendering", ()), res);
-};
+}
+
+/* This needs to come before the render section */
+Express.Static.defaultOptions()
+|> Express.Static.make("assets/")
+|> Express.Static.asMiddleware
+|> Express.App.useOnPath(app, ~path="/assets");
 
 /* Express works on middleware and bs-express provides an easy way to make
    middleware out of functions */

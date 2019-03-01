@@ -5,17 +5,19 @@ var Js_exn = require("bs-platform/lib/js/js_exn.js");
 var Express = require("bs-express/src/Express.js");
 var Process = require("process");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
-var App$ReasonSsr = require("./App.bs.js");
 var Layout$ReasonSsr = require("./Layout.bs.js");
 var Server = require("react-dom/server");
 var Caml_js_exceptions = require("bs-platform/lib/js/caml_js_exceptions.js");
+var FetchData$ReasonSsr = require("./FetchData.bs.js");
 
 var app = Express.App[/* make */17](/* () */0);
 
 function renderHTML(_next, _req, res) {
-  var content = Server.renderToString(ReasonReact.element(undefined, undefined, App$ReasonSsr.make(/* array */[])));
+  var content = Server.renderToString(ReasonReact.element(undefined, undefined, FetchData$ReasonSsr.make(/* array */[])));
   return Express.Response[/* sendString */2](Layout$ReasonSsr.make(content, "Server Rendering", /* () */0), res);
 }
+
+Express.App[/* useOnPath */2](app, "/assets", Express.Static[/* asMiddleware */13](Express.Static[/* make */12]("assets/", Express.Static[/* defaultOptions */0](/* () */0))));
 
 Express.App[/* useOnPath */2](app, "/", Express.Middleware[/* from */5](renderHTML));
 
