@@ -4,7 +4,7 @@ let make = (~models: DataTypes.models, ~city, _children) => {
   ...component,
   render: (_self) => {
       <div>
-        <h2> {ReasonReact.string("Models in city:" ++ city)} </h2>
+        <h2> {ReasonReact.string("Models in city: " ++ city)} </h2>
         <ul>
           {models
            |> List.filter((model: DataTypes.model) => model.city === city)

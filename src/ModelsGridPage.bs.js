@@ -21,7 +21,7 @@ function make(models, city, _children) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (_self) {
-              return React.createElement("div", undefined, React.createElement("h2", undefined, "Models in city:" + city), React.createElement("ul", undefined, $$Array.of_list(List.map((function (model) {
+              return React.createElement("div", undefined, React.createElement("h2", undefined, "Models in city: " + city), React.createElement("ul", undefined, $$Array.of_list(List.map((function (model) {
                                         return React.createElement("li", {
                                                     key: String(model[/* id */0])
                                                   }, ReasonReact.element(undefined, undefined, Link$ReasonSsr.make("/" + (city + ("/" + model[/* name */1])), undefined, /* array */[model[/* name */1]])));
