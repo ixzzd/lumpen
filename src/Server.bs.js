@@ -8,12 +8,12 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Layout$ReasonSsr = require("./Layout.bs.js");
 var Server = require("react-dom/server");
 var Caml_js_exceptions = require("bs-platform/lib/js/caml_js_exceptions.js");
-var FetchData$ReasonSsr = require("./FetchData.bs.js");
+var DataFetcher$ReasonSsr = require("./DataFetcher.bs.js");
 
 var app = Express.App[/* make */17](/* () */0);
 
 function renderHTML(_next, _req, res) {
-  var content = Server.renderToString(ReasonReact.element(undefined, undefined, FetchData$ReasonSsr.make(/* array */[])));
+  var content = Server.renderToString(ReasonReact.element(undefined, undefined, DataFetcher$ReasonSsr.make(/* array */[])));
   return Express.Response[/* sendString */2](Layout$ReasonSsr.make(content, "Server Rendering", /* () */0), res);
 }
 

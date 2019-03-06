@@ -3,9 +3,9 @@
 
 var ReactDOMRe = require("reason-react/src/ReactDOMRe.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
-var FetchData$ReasonSsr = require("./FetchData.bs.js");
+var DataFetcher$ReasonSsr = require("./DataFetcher.bs.js");
 
-ReactDOMRe.renderToElementWithId(ReasonReact.element(undefined, undefined, FetchData$ReasonSsr.make(/* array */[])), "react-root");
+ReactDOMRe.renderToElementWithId(ReasonReact.element(undefined, undefined, DataFetcher$ReasonSsr.make(/* array */[])), "react-root");
 
 console.log("hello browser");
 

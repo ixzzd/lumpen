@@ -3,7 +3,7 @@ let app = Express.App.make();
 
 /* Our initial rendering function, we will soon make this way better */
 let renderHTML = (_next, _req, res) => {
-  let content = ReactDOMServerRe.renderToString(<FetchData />);
+  let content = ReactDOMServerRe.renderToString(<DataFetcher />);
   Express.Response.sendString(Layout.make(~content, ~title="Server Rendering", ()), res);
 }
 
