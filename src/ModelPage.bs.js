@@ -6,7 +6,7 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 
 var component = ReasonReact.statelessComponent("ModelPage");
 
-function make(_children, name) {
+function make(_children, model) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -18,7 +18,9 @@ function make(_children, name) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (_self) {
-              return React.createElement("h2", undefined, "Model page:" + name);
+              return React.createElement("div", undefined, React.createElement("h2", undefined, "Model page:" + model[/* name */1]), React.createElement("img", {
+                              src: model[/* avatar */3][/* normal */0]
+                            }));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],

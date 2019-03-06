@@ -8,11 +8,19 @@ var Json_decode = require("@glennsl/bs-json/src/Json_decode.bs.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var App$ReasonSsr = require("./App.bs.js");
 
+function decodeModelImage(json) {
+  return /* record */[
+          /* normal */Json_decode.field("normal", Json_decode.string, json),
+          /* og */Json_decode.field("og", Json_decode.string, json)
+        ];
+}
+
 function decodeModel(json) {
   return /* record */[
           /* id */Json_decode.field("id", Json_decode.$$int, json),
           /* name */Json_decode.field("name", Json_decode.string, json),
-          /* city */Json_decode.field("city", Json_decode.string, json)
+          /* city */Json_decode.field("city", Json_decode.string, json),
+          /* avatar */Json_decode.field("avatar", decodeModelImage, json)
         ];
 }
 
@@ -35,6 +43,7 @@ function decodeData(json) {
 }
 
 var Decode = /* module */[
+  /* decodeModelImage */decodeModelImage,
   /* decodeModel */decodeModel,
   /* decodeCity */decodeCity,
   /* decodeData */decodeData

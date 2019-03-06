@@ -43,7 +43,10 @@ let make = (~models: DataTypes.models, ~cities: DataTypes.cities, _children) => 
       <CitySelector cities />
       (
         switch (self.state.route) {
-          | ModelRoute(modelName) => <ModelPage name=modelName />
+          | ModelRoute(modelName) => {
+            let model = models |> List.find((model: DataTypes.model) => model.name === modelName);
+            <ModelPage model/>
+          }
           | ModelsGridRoute(cityName) => <ModelsGridPage models city=cityName />
           | ContactRoute => <ContactPage />
           | NotFound => <NotFoundPage />

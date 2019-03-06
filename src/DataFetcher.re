@@ -14,11 +14,18 @@ type action =
   | LoadDataFailed;
 
 module Decode = {
+  let decodeModelImage = json => {
+    Json.Decode.{
+      DataTypes.normal: json |> field("normal", string),
+      DataTypes.og: json |> field("og", string),
+    };
+  };
   let decodeModel = json => {
     Json.Decode.{
       DataTypes.id: json |> field("id", int),
       name: json |> field("name", string),
       city: json |> field("city", string),
+      avatar: json |> field("avatar", decodeModelImage),
     };
   };
   let decodeCity = json => {
