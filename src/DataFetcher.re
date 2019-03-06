@@ -19,14 +19,12 @@ module Decode = {
       DataTypes.id: json |> field("id", int),
       name: json |> field("name", string),
       city: json |> field("city", string),
-      position: json |> field("position", int),
     };
   };
   let decodeCity = json => {
     Json.Decode.{
       DataTypes.id: json |> field("id", int),
       name: json |> field("name", string),
-      position: json |> field("position", int),
     };
   };
   let decodeData = json => {
@@ -47,7 +45,7 @@ let fetchData = () => {
          |> Decode.decodeData
          |> (decodedData => Some(decodedData) |> resolve)
        )
-    |> catch(_err => resolve(None))
+    |> catch(_err => { Js.log(_err); resolve(None) } )
   );
 };
 

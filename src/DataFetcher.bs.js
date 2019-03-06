@@ -12,16 +12,14 @@ function decodeModel(json) {
   return /* record */[
           /* id */Json_decode.field("id", Json_decode.$$int, json),
           /* name */Json_decode.field("name", Json_decode.string, json),
-          /* city */Json_decode.field("city", Json_decode.string, json),
-          /* position */Json_decode.field("position", Json_decode.$$int, json)
+          /* city */Json_decode.field("city", Json_decode.string, json)
         ];
 }
 
 function decodeCity(json) {
   return /* record */[
           /* id */Json_decode.field("id", Json_decode.$$int, json),
-          /* name */Json_decode.field("name", Json_decode.string, json),
-          /* position */Json_decode.field("position", Json_decode.$$int, json)
+          /* name */Json_decode.field("name", Json_decode.string, json)
         ];
 }
 
@@ -49,6 +47,7 @@ function fetchData(param) {
                   var decodedData = decodeData(json);
                   return Promise.resolve(decodedData);
                 })).catch((function (_err) {
+                console.log(_err);
                 return Promise.resolve(undefined);
               }));
 }
