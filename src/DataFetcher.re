@@ -1,6 +1,6 @@
 type data = {
-  models: list(DataTypes.model),
-  cities: list(DataTypes.city)
+  models: DataTypes.models,
+  cities: DataTypes.cities
 }
 
 type state =
@@ -83,6 +83,6 @@ let make = _children => {
     switch (self.state) {
     | Loading => <div> {ReasonReact.string("Loading...")} </div>
     | Failure => <div> {ReasonReact.string("Something went wrong!")} </div>
-    | Success(data) => <App models=data.models />
+    | Success(data) => <App models=data.models cities=data.cities />
     },
 };

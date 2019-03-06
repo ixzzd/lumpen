@@ -6,7 +6,7 @@ var ModelsPage$ReasonSsr = require("./ModelsPage.bs.js");
 
 var component = ReasonReact.statelessComponent("App");
 
-function make(models, _children) {
+function make(models, cities, _children) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],

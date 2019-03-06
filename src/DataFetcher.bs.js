@@ -77,7 +77,8 @@ function make(_children) {
                   return React.createElement("div", undefined, "Loading...");
                 }
               } else {
-                return ReasonReact.element(undefined, undefined, App$ReasonSsr.make(match[0][/* models */0], /* array */[]));
+                var data = match[0];
+                return ReasonReact.element(undefined, undefined, App$ReasonSsr.make(data[/* models */0], data[/* cities */1], /* array */[]));
               }
             }),
           /* initialState */(function (param) {
