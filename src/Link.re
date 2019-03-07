@@ -1,9 +1,11 @@
-let component = ReasonReact.statelessComponent("Link");
+open Utils;
+
+let component = RR.statelessComponent(__MODULE__);
 
 let handleClick = (href, event) =>
   if (!ReactEvent.Mouse.defaultPrevented(event)) {
     ReactEvent.Mouse.preventDefault(event);
-    ReasonReact.Router.push(href);
+    RR.Router.push(href);
   };
 
 let make = (~href, ~className="", children) => {

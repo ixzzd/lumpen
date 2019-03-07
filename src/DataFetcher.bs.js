@@ -7,6 +7,7 @@ var React = require("react");
 var Json_decode = require("@glennsl/bs-json/src/Json_decode.bs.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var App$ReasonSsr = require("./App.bs.js");
+var Utils$ReasonSsr = require("./Utils.bs.js");
 
 function decodeModelImage(json) {
   return /* record */[
@@ -61,7 +62,7 @@ function fetchData(param) {
               }));
 }
 
-var component = ReasonReact.reducerComponent("DataFetcher");
+var component = Curry._1(Utils$ReasonSsr.RR[/* reducerComponent */2], "DataFetcher-ReasonSsr");
 
 function make(_children) {
   return /* record */[
@@ -80,9 +81,9 @@ function make(_children) {
               var match = self[/* state */1];
               if (typeof match === "number") {
                 if (match !== 0) {
-                  return React.createElement("div", undefined, "Something went wrong!");
+                  return React.createElement("div", undefined, Utils$ReasonSsr.s("Something went wrong!"));
                 } else {
-                  return React.createElement("div", undefined, "Loading...");
+                  return React.createElement("div", undefined, Utils$ReasonSsr.s("Loading..."));
                 }
               } else {
                 var data = match[0];

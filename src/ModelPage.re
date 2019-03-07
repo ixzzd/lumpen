@@ -1,10 +1,12 @@
-let component = ReasonReact.statelessComponent("ModelPage");
+open Utils;
+
+let component = RR.statelessComponent(__MODULE__);
 
 let make = (_children, ~model:DataTypes.model) => {
   ...component,
   render: (_self) => {
     <div>
-      <h2> {ReasonReact.string("Model page:" ++ model.name)} </h2>
+      <h2> {s("Model page:" ++ model.name)} </h2>
       <img src={model.avatar.normal} />
     </div>
   }

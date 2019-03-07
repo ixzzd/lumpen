@@ -1,6 +1,9 @@
+open Utils;
+open DataTypes;
+
 type data = {
-  models: DataTypes.models,
-  cities: DataTypes.cities
+  models: models,
+  cities: cities
 }
 
 type state =
@@ -16,13 +19,13 @@ type action =
 module Decode = {
   let decodeModelImage = json => {
     Json.Decode.{
-      DataTypes.normal: json |> field("normal", string),
-      DataTypes.og: json |> field("og", string),
+      normal: json |> field("normal", string),
+      og: json |> field("og", string),
     };
   };
   let decodeModel = json => {
     Json.Decode.{
-      DataTypes.id: json |> field("id", int),
+      id: json |> field("id", int),
       name: json |> field("name", string),
       city: json |> field("city", string),
       avatar: json |> field("avatar", decodeModelImage),
@@ -30,7 +33,7 @@ module Decode = {
   };
   let decodeCity = json => {
     Json.Decode.{
-      DataTypes.id: json |> field("id", int),
+      id: json |> field("id", int),
       name: json |> field("name", string),
     };
   };
@@ -56,7 +59,7 @@ let fetchData = () => {
   );
 };
 
-let component = ReasonReact.reducerComponent("DataFetcher");
+let component = RR.reducerComponent(__MODULE__);
 
 let make = _children => {
   ...component,
@@ -64,7 +67,7 @@ let make = _children => {
   reducer: (action, _state) =>
     switch (action) {
     | LoadData =>
-      ReasonReact.UpdateWithSideEffects(
+      RR.UpdateWithSideEffects(
         Loading,
         self =>
           Js.Promise.(
@@ -78,16 +81,16 @@ let make = _children => {
             |> ignore
           ),
       )
-    | DataLoaded(data) => ReasonReact.Update(Success(data))
-    | LoadDataFailed => ReasonReact.Update(Failure)
+    | DataLoaded(data) => RR.Update(Success(data))
+    | LoadDataFailed => RR.Update(Failure)
     },
   didMount: self => {
     self.send(LoadData);
   },
   render: self =>
     switch (self.state) {
-    | Loading => <div> {ReasonReact.string("Loading...")} </div>
-    | Failure => <div> {ReasonReact.string("Something went wrong!")} </div>
+    | Loading => <div> {s("Loading...")} </div>
+    | Failure => <div> {s("Something went wrong!")} </div>
     | Success(data) => <App models=data.models cities=data.cities />
     },
 };

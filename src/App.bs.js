@@ -7,6 +7,7 @@ var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Link$ReasonSsr = require("./Link.bs.js");
+var Utils$ReasonSsr = require("./Utils.bs.js");
 var ModelPage$ReasonSsr = require("./ModelPage.bs.js");
 var ContactPage$ReasonSsr = require("./ContactPage.bs.js");
 var CitySelector$ReasonSsr = require("./CitySelector.bs.js");
@@ -45,7 +46,7 @@ function mapUrlToRoute(url) {
   }
 }
 
-var component = ReasonReact.reducerComponent("App");
+var component = Curry._1(Utils$ReasonSsr.RR[/* reducerComponent */2], "App-ReasonSsr");
 
 function make(models, cities, _children) {
   return /* record */[
@@ -79,7 +80,7 @@ function make(models, cities, _children) {
                       }), models);
                 tmp = ReasonReact.element(undefined, undefined, ModelPage$ReasonSsr.make(/* array */[], model));
               }
-              return React.createElement("div", undefined, ReasonReact.element(undefined, undefined, Link$ReasonSsr.make("contacts", undefined, /* array */["Contacts"])), ReasonReact.element(undefined, undefined, CitySelector$ReasonSsr.make(cities, /* array */[])), tmp);
+              return React.createElement("div", undefined, ReasonReact.element(undefined, undefined, Link$ReasonSsr.make("/contacts", undefined, /* array */[Utils$ReasonSsr.s("Contacts")])), ReasonReact.element(undefined, undefined, CitySelector$ReasonSsr.make(cities, /* array */[])), tmp);
             }),
           /* initialState */(function (param) {
               return /* record */[/* route : ModelsGridRoute */Block.__(1, ["moscow"])];

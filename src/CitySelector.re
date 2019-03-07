@@ -1,4 +1,6 @@
-let component = ReasonReact.statelessComponent("CitySelector");
+open Utils;
+
+let component = RR.statelessComponent(__MODULE__);
 
 let make = (~cities: DataTypes.cities, _children) => {
   ...component,
@@ -7,11 +9,10 @@ let make = (~cities: DataTypes.cities, _children) => {
       {cities
        |> List.map((city: DataTypes.city) =>
          <Link key={string_of_int(city.id)} href=("/" ++ city.name)>
-           (ReasonReact.string(city.name))
+           (s(city.name))
          </Link>
         )
-       |> Array.of_list
-       |> ReasonReact.array}
+       |> RR.list}
     </div>
   }
 };

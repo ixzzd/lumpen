@@ -1,3 +1,5 @@
+open Utils;
+
 type route =
   | ModelRoute(string)
   | ModelsGridRoute(string)
@@ -11,10 +13,10 @@ type action =
 
 let reducer = (action, _state) =>
   switch (action) {
-  | ChangeRoute(route) => ReasonReact.Update({route: route})
+  | ChangeRoute(route) => RR.Update({route: route})
   };
 
-let mapUrlToRoute = (url: ReasonReact.Router.url) =>
+let mapUrlToRoute = (url: RR.Router.url) =>
   switch (url.path) {
   | ["contacts"] => ContactRoute
   | [cityName] => ModelsGridRoute(cityName)
@@ -22,7 +24,7 @@ let mapUrlToRoute = (url: ReasonReact.Router.url) =>
   | _ => NotFound
   };
 
-let component = ReasonReact.reducerComponent("App");
+let component = RR.reducerComponent(__MODULE__);
 
 let make = (~models: DataTypes.models, ~cities: DataTypes.cities, _children) => {
   ...component,
@@ -30,15 +32,15 @@ let make = (~models: DataTypes.models, ~cities: DataTypes.cities, _children) => 
   initialState: () => {route: ModelsGridRoute("moscow")},
   didMount: self => {
     let watchId =
-      ReasonReact.Router.watchUrl(url =>
+      RR.Router.watchUrl(url =>
         self.send(ChangeRoute(url |> mapUrlToRoute))
       );
-    self.onUnmount(() => ReasonReact.Router.unwatchUrl(watchId));
+    self.onUnmount(() => RR.Router.unwatchUrl(watchId));
   },
   render: self => {
     <div>
-      <Link href=("contacts")>
-        (ReasonReact.string("Contacts"))
+      <Link href=("/contacts")>
+        (s("Contacts"))
       </Link>
       <CitySelector cities />
       (

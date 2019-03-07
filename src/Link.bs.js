@@ -4,8 +4,9 @@
 var Curry = require("bs-platform/lib/js/curry.js");
 var ReactDOMRe = require("reason-react/src/ReactDOMRe.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
+var Utils$ReasonSsr = require("./Utils.bs.js");
 
-var component = ReasonReact.statelessComponent("Link");
+var component = Curry._1(Utils$ReasonSsr.RR[/* statelessComponent */0], "Link-ReasonSsr");
 
 function handleClick(href, $$event) {
   if ($$event.defaultPrevented) {
