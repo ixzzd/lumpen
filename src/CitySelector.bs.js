@@ -2,13 +2,17 @@
 'use strict';
 
 var List = require("bs-platform/lib/js/list.js");
+var $$Array = require("bs-platform/lib/js/array.js");
 var Curry = require("bs-platform/lib/js/curry.js");
-var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
-var Link$ReasonSsr = require("./Link.bs.js");
 var Utils$ReasonSsr = require("./Utils.bs.js");
+var Dropdown$ReasonSsr = require("./Dropdown.bs.js");
 
 var component = Curry._1(Utils$ReasonSsr.RR[/* statelessComponent */0], "CitySelector-ReasonSsr");
+
+function changeCity(cityName) {
+  return ReasonReact.Router[/* push */0]("/" + cityName);
+}
 
 function make(cities, _children) {
   return /* record */[
@@ -22,9 +26,12 @@ function make(cities, _children) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (_self) {
-              return React.createElement("div", undefined, Utils$ReasonSsr.RR[/* list */9](List.map((function (city) {
-                                    return ReasonReact.element(String(city[/* id */0]), undefined, Link$ReasonSsr.make("/" + city[/* name */1], undefined, /* array */[Utils$ReasonSsr.s(city[/* name */1])]));
-                                  }), cities)));
+              var cityNames = $$Array.of_list(List.map((function (city) {
+                          return city[/* name */1];
+                        }), cities));
+              return ReasonReact.element(undefined, undefined, Dropdown$ReasonSsr.make(undefined, cityNames, (function (item) {
+                                return changeCity(item.value);
+                              }), /* array */[]));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],
@@ -34,5 +41,6 @@ function make(cities, _children) {
 }
 
 exports.component = component;
+exports.changeCity = changeCity;
 exports.make = make;
 /* component Not a pure module */
