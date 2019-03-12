@@ -4,7 +4,7 @@ type route =
   | ModelRoute(string)
   | ModelsGridRoute(string)
   | ContactRoute
-  | NotFound
+  | NotFound;
 
 type state = {route};
 
@@ -39,21 +39,18 @@ let make = (~models: DataTypes.models, ~cities: DataTypes.cities, _children) => 
   },
   render: self => {
     <div>
-      <Link href=("/contacts")>
-        (s("Contacts"))
-      </Link>
+      <Link href="/contacts"> {s("Contacts")} </Link>
       <CitySelector cities />
-      (
-        switch (self.state.route) {
-          | ModelRoute(modelName) => {
-            let model = models |> List.find((model: DataTypes.model) => model.name === modelName);
-            <ModelPage model/>
-          }
-          | ModelsGridRoute(cityName) => <ModelsGridPage models city=cityName />
-          | ContactRoute => <ContactPage />
-          | NotFound => <NotFoundPage />
-          }
-      )
-      </div>;
-  }
+      {switch (self.state.route) {
+       | ModelRoute(modelName) =>
+         let model =
+           models
+           |> List.find((model: DataTypes.model) => model.name === modelName);
+         <ModelPage model />;
+       | ModelsGridRoute(cityName) => <ModelsGridPage models city=cityName />
+       | ContactRoute => <ContactPage />
+       | NotFound => <NotFoundPage />
+       }}
+    </div>;
+  },
 };

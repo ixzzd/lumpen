@@ -1,20 +1,20 @@
 type city = {
   id: int,
-  name: string
+  name: string,
 };
 
 type cities = list(city);
 
 type modelImage = {
   normal: string,
-  og: string
-}
+  og: string,
+};
 
 type model = {
   id: int,
   name: string,
   city: string,
-  avatar: modelImage
+  avatar: modelImage,
 };
 
 type models = list(model);

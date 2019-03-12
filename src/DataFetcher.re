@@ -2,9 +2,9 @@ open Utils;
 open DataTypes;
 
 type data = {
-  models: models,
-  cities: cities
-}
+  models,
+  cities,
+};
 
 type state =
   | Loading
@@ -55,7 +55,10 @@ let fetchData = () => {
          |> Decode.decodeData
          |> (decodedData => Some(decodedData) |> resolve)
        )
-    |> catch(_err => { Js.log(_err); resolve(None) } )
+    |> catch(_err => {
+         Js.log(_err);
+         resolve(None);
+       })
   );
 };
 
@@ -91,6 +94,6 @@ let make = _children => {
     switch (self.state) {
     | Loading => <div> {s("Loading...")} </div>
     | Failure => <div> {s("Something went wrong!")} </div>
-    | Success(data) => <App models=data.models cities=data.cities />
+    | Success(data) => <App models={data.models} cities={data.cities} />
     },
 };

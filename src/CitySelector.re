@@ -2,12 +2,16 @@ open Utils;
 
 let component = RR.statelessComponent(__MODULE__);
 
-let changeCity = (cityName) => RR.Router.push("/" ++ cityName);
+let changeCity = cityName => RR.Router.push("/" ++ cityName);
 
 let make = (~cities: DataTypes.cities, _children) => {
   ...component,
- render: (_self) => {
-   let cityNames = cities |> List.map((city: DataTypes.city) => city.name) |> Array.of_list;
-   <Dropdown options=cityNames onChange={(item) => changeCity(Dropdown.valueGet(item))} />
-  }
+  render: _self => {
+    let cityNames =
+      cities |> List.map((city: DataTypes.city) => city.name) |> Array.of_list;
+    <Dropdown
+      options=cityNames
+      onChange={item => changeCity(Dropdown.valueGet(item))}
+    />;
+  },
 };
