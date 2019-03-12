@@ -2,7 +2,7 @@
 external dropdown: ReasonReact.reactClass = "default";
 
 [@bs.deriving abstract]
-type optionItem = {
+type item = {
   label: string,
   value: string,
 };
