@@ -5,6 +5,22 @@ var Caml_option = require("bs-platform/lib/js/caml_option.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var IndexJs = require("react-dropdown/dist/index.js");
 
+function inputOptionToJs(param) {
+  return {
+          label: param[/* label */0],
+          value: param[/* value */1],
+          className: param[/* className */2]
+        };
+}
+
+function inputOptionFromJs(param) {
+  return /* record */[
+          /* label */param.label,
+          /* value */param.value,
+          /* className */param.className
+        ];
+}
+
 function make(className, options, onChange, _children) {
   var tmp = {
     options: options
@@ -18,5 +34,7 @@ function make(className, options, onChange, _children) {
   return ReasonReact.wrapJsForReason(IndexJs.default, tmp, _children);
 }
 
+exports.inputOptionToJs = inputOptionToJs;
+exports.inputOptionFromJs = inputOptionFromJs;
 exports.make = make;
 /* ReasonReact Not a pure module */

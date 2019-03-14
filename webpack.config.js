@@ -19,5 +19,8 @@ module.exports = {
   },
   resolve: {
     extensions: [".js", ".bs.js"]
+  },
+  optimization: {
+    minimize: false
   }
 };
