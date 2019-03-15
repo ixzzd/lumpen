@@ -11,13 +11,13 @@ let make = (~cities: DataTypes.cities, _children) => {
     let cityNames =
       cities
       |> List.map((city: DataTypes.city) =>
-   //        InputMap(
+           InputMap(
              inputOptionToJs({
                label: city.name,
                className: Some(city.name),
                value: city.name,
              }),
-    //      )
+           )
          )
       //InputString(city.name)
       |> Array.of_list;

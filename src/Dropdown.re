@@ -14,14 +14,14 @@ type outputOption = {
 };
 
 type input =
-  | InputMap(inputOption)
+  | InputMap(abs_inputOption)
   | InputString(string);
 
 [@bs.obj]
 external makeProps:
   (
     ~className: string=?,
-    ~options: array(abs_inputOption),
+    ~options: array(input),
     ~onChange: outputOption => unit=?,
     unit
   ) =>

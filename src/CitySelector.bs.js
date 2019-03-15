@@ -3,6 +3,7 @@
 
 var List = require("bs-platform/lib/js/list.js");
 var $$Array = require("bs-platform/lib/js/array.js");
+var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Utils$ReasonSsr = require("./Utils.bs.js");
@@ -27,11 +28,11 @@ function make(cities, _children) {
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (_self) {
               var cityNames = $$Array.of_list(List.map((function (city) {
-                          return Dropdown$ReasonSsr.inputOptionToJs(/* record */[
-                                      /* label */city[/* name */1],
-                                      /* value */city[/* name */1],
-                                      /* className */city[/* name */1]
-                                    ]);
+                          return /* InputMap */Block.__(0, [Dropdown$ReasonSsr.inputOptionToJs(/* record */[
+                                          /* label */city[/* name */1],
+                                          /* value */city[/* name */1],
+                                          /* className */city[/* name */1]
+                                        ])]);
                         }), cities));
               return ReasonReact.element(undefined, undefined, Dropdown$ReasonSsr.make(undefined, cityNames, (function (item) {
                                 return changeCity(item.value);
